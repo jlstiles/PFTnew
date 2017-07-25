@@ -2,7 +2,6 @@
 date.fill = function(date)
 {
   # datep = c(0,4,NA,NA,NA,NA,98)
-  # date = datep
   na = which(is.na(date)==TRUE)
   m = length(na)
   n = length(date)
