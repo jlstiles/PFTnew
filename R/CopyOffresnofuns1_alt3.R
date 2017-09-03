@@ -1,6 +1,5 @@
 #' @export
-date.fill = function(date)
-{
+date.fill = function(date) {
   # datep = c(0,4,NA,NA,NA,NA,98)
   na = which(is.na(date)==TRUE)
   m = length(na)
@@ -16,12 +15,6 @@ date.fill = function(date)
       a=a+1
       }}
     a=a-1
-    #' #   date[na[(m-a+1):m]]=vapply(1:a,FUN = function(x) date[n-a]+180*x,FUN.VALUE=4)
-    #' # date
-    #' # na
-    #' # c(m,n,a)
-    #' 
-
     na = which(is.na(date[1:(n-a)])==TRUE)
     if (length(na)==0) date=date
     else
@@ -29,7 +22,7 @@ date.fill = function(date)
       m = length(na)
       n = length(date[1:(n-a)])
       h = rep(1,m)
-
+      
       for (x in 1:m)
       {
         if (x==1) h[x]=1
@@ -68,18 +61,27 @@ avebtwndate = function(dates,date,measure)
 #' @export
 bintimes = function(df,prefixes)
 {
+  # df = subset(df.morgan, ID==14)
+  # prefixes = "date"
+  # get date columns
   datecols = grep(prefixes[1],colnames(df))
+  # Find which dates are included
   indices = vapply(1:length(datecols),FUN = function(x) as.numeric(all(is.na(df[,datecols[x]])==TRUE)),
                    FUN.VALUE = 2)
   indices = which(indices==0)
+  
   m = vapply(prefixes,FUN = function(x) grep(x,colnames(df))[indices],
              FUN.VALUE = rep(1,length(indices)))
   m = as.data.frame(m)
-  useful =apply(m,2,FUN = function(vec)
+  
+  useful = apply(m,2,
+                 FUN = function(vec)
   {
     vapply(1:length(vec),FUN = function(x) max(df[,vec[x]],na.rm=TRUE), FUN.VALUE=3)
   })
+  
   useful = as.data.frame(useful)
+  
   for (a in 1:length(prefixes))
   {
     h = grep(prefixes[a],colnames(df))
