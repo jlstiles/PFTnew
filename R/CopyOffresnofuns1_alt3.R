@@ -20,6 +20,7 @@ date.fill = function(date)
     #' # date
     #' # na
     #' # c(m,n,a)
+    #' 
 
     na = which(is.na(date[1:(n-a)])==TRUE)
     if (length(na)==0) date=date
