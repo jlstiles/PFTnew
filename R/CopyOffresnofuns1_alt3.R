@@ -743,7 +743,7 @@ getwideform = function(T,blvars,blfactors,timevars,df.morganallex,
 }
 
 #' @export
-getlongform = function(df.morganallex,exposure,exposuredf,outcome){
+getlongform = function(df.morganallex,exposure,exposuredf,outcome,lvdate, lastday){
   
   # Do exposures for different time periods with 75% cut-off for censoring
   # We need a censoring variable to at least censor after their last exposure
